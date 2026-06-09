@@ -1,0 +1,388 @@
+### 2. `style.css`
+```css
+/* ==========================================================================
+   VARIÁVEIS DE CONFIGURAÇÃO DO TEMA (Fácil Personalização)
+   ========================================================================== */
+:root {
+    /* Paleta de Cores Obrigatória */
+    --cor-azul: #0B3C5D;
+    --cor-branco: #FFFFFF;
+    --cor-azul-celeste: #328CC1;
+    --cor-azul-metalico: #1D2731;
+    --cor-verde: #4B8A61;
+    --cor-amarelo: #F9E03B;
+    --cor-ouro: #D9B310;
+    --cor-preto: #111111;
+
+    /* Cores de Fundo Estilizadas */
+    --bg-principal: #F8F9FA;
+    --bg-cards: #FFFFFF;
+    --text-principal: #2B2D42;
+    --text-mutado: #5C677D;
+
+    /* Tipografia Dinâmica Fluid Scale com clamp() */
+    --font-titulo-hero: clamp(2rem, 4vw + 1rem, 3.8rem);
+    --font-subtitulo-hero: clamp(1.1rem, 2vw + 0.5rem, 1.8rem);
+    --font-titulos: clamp(1.5rem, 3vw, 2.2rem);
+    --font-corpo: clamp(1rem, 1vw + 0.5rem, 1.15rem);
+
+    /* Espaçamentos e Estrutura Configuráveis */
+    --padding-container: clamp(1rem, 5vw, 4rem);
+    --border-radius-padrao: 12px;
+    --transicao-suave: cubic-bezier(0.25, 1, 0.5, 1);
+    --sombra-suave: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --sombra-hover: 0 20px 40px rgba(11, 60, 93, 0.15);
+}
+
+/* Modo Escuro (Acessibilidade) */
+body.dark-mode {
+    --bg-principal: #121212;
+    --bg-cards: #1E1E1E;
+    --text-principal: #E0E0E0;
+    --text-mutado: #A0A0A0;
+    --cor-azul: #4EA8DE;
+    --cor-azul-metalico: #0A0F14;
+}
+
+/* ==========================================================================
+   RESET E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-principal);
+    color: var(--text-principal);
+    line-height: 1.6;
+    transition: background-color 0.4s var(--transicao-suave), color 0.4s var(--transicao-suave);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   PAINEL DE ACESSIBILIDADE FLUTUANTE
+   ========================================================================== */
+.acessibilidade-painel {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.btn-acessibilidade-toggle {
+    background-color: var(--cor-azul);
+    color: var(--cor-branco);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.btn-acessibilidade-toggle:hover {
+    transform: scale(1.05);
+}
+
+.acessibilidade-conteudo {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    background-color: var(--bg-cards);
+    padding: 15px;
+    border-radius: var(--border-radius-padrao);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin-top: 10px;
+    border: 2px solid var(--cor-azul-celeste);
+}
+
+.acessibilidade-conteudo.ativo {
+    display: flex;
+}
+
+.acessibilidade-conteudo button {
+    background-color: var(--bg-principal);
+    color: var(--text-principal);
+    border: 1px solid var(--cor-azul-celeste);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.acessibilidade-conteudo button:hover {
+    background-color: var(--cor-azul);
+    color: var(--cor-branco);
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-container);
+    text-align: center;
+    /* Degradê profissional que mistura os tons de Azul Metálico, Azul Real e Verde */
+    background: linear-gradient(135deg, var(--cor-azul-metalico) 0%, var(--cor-azul) 50%, var(--cor-verde) 100%);
+    color: var(--cor-branco);
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(17, 17, 17, 0.4) 100%);
+    pointer-events: none;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-titulo {
+    font-size: var(--font-titulo-hero);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.hero-subtitulo {
+    font-size: var(--font-subtitulo-hero);
+    color: var(--cor-amarelo);
+    font-weight: 400;
+    max-width: 900px;
+    margin: 0 auto;
+    border-left: 4px solid var(--cor-ouro);
+    padding-left: 15px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   ESTRUTURA CONTAINER PRINCIPAL
+   ========================================================================== */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--padding-container);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 8vw, 6rem);
+}
+
+.subtitulo-decorado {
+    font-size: var(--font-titulos);
+    color: var(--cor-azul);
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+body.dark-mode .subtitulo-decorado {
+    color: var(--cor-azul-celeste);
+}
+
+.subtitulo-decorado::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--cor-verde);
+    border-radius: 2px;
+}
+
+/* INTRODUÇÃO */
+.secao-introducao p {
+    font-size: var(--font-corpo);
+    margin-bottom: 20px;
+    color: var(--text-principal);
+    max-width: 1100px;
+}
+
+/* ==========================================================================
+   ACCORDION (PILAREs DA PRODUÇÃO)
+   ========================================================================== */
+.descricao-contexto {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: var(--text-mutado);
+}
+
+.accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 1000px;
+}
+
+.accordion-item {
+    background-color: var(--bg-cards);
+    border-radius: var(--border-radius-padrao);
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .accordion-item {
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.accordion-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover);
+}
+
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cor-azul-metalico);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .accordion-header {
+    color: var(--cor-branco);
+}
+
+.accordion-header .icon {
+    font-size: 1.5rem;
+    color: var(--cor-verde);
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.ativo .accordion-header {
+    color: var(--cor-verde);
+}
+
+.accordion-item.ativo .accordion-header .icon {
+    transform: rotate(45deg);
+    color: var(--cor-ouro);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+    padding: 0 25px;
+    background-color: rgba(75, 138, 97, 0.03);
+}
+
+.accordion-item.ativo .accordion-content {
+    max-height: 1000px; /* Grande o suficiente para o texto expandido */
+    padding-bottom: 25px;
+    transition: max-height 0.4s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.accordion-content p {
+    font-size: var(--font-corpo);
+    color: var(--text-principal);
+}
+
+/* ==========================================================================
+   GALERIA DE IMAGENS RESERVADAS
+   ========================================================================== */
+.galeria-imagens {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+.imagem {
+    position: relative;
+    border-radius: var(--border-radius-padrao);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    background-color: var(--cor-azul-metalico);
+    aspect-ratio: 16 / 10;
+    transition: transform 0.4s var(--transicao-suave), box-shadow 0.4s var(--transicao-suave);
+}
+
+.imagem::before {
+    content: "Espaço Reservado para Imagem";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    text-align: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s var(--transicao-suave), filter 0.4s ease;
+}
+
+/* Efeito Premium Hover nas Imagens */
+.imagem:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-hover);
+}
+
+.imagem:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   CARDS DE VALOR ADICIONAL
+   ========================================================================== */
+.card-informativo-duplo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.card-mini {
+    background-color: var(--bg-cards);
+    padding: 35px;
+    border-radius: var(--border-radius-padrao);
+    box-shadow: var(--sombra-suave);
+    border-top: 5px solid var(--cor-azul-celeste);
+}
+
+.card-mini:nth-child(2) {
