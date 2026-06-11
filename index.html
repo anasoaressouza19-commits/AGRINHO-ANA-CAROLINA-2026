@@ -235,22 +235,58 @@
  .botao-rural:active {
    transform: translateY(0);
  }
-</style>
-    <!-- Script de Acessibilidade e Funcionalidades -->
+    <!-- Script de Acessibilidade e Accordion -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Elementos do Menu de Acessibilidade
+            // ==========================================
+            // 1. FUNCIONAMENTO DO ACCORDION (ABAS)
+            // ==========================================
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const content = item.querySelector('.accordion-content');
+                    const icon = header.querySelector('.icon');
+                    
+                    // Verifica se a aba clicada já está aberta
+                    const estaAtivo = item.classList.contains('ativo');
+
+                    // CORREÇÃO VISUAL EXTRA: Fecha todos os outros accordions antes de abrir o novo (opcional)
+                    document.querySelectorAll('.accordion-item').forEach(outroItem => {
+                        outroItem.classList.remove('ativo');
+                        outroItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                        outroItem.querySelector('.accordion-content').setAttribute('aria-hidden', 'true');
+                        outroItem.querySelector('.accordion-content').style.maxHeight = null;
+                        const outroIcon = outroItem.querySelector('.icon');
+                        if (outroIcon) outroIcon.textContent = '+';
+                    });
+
+                    // Se a aba não estava ativa, abre ela agora
+                    if (!estaAtivo) {
+                        item.classList.add('ativo');
+                        header.setAttribute('aria-expanded', 'true');
+                        content.setAttribute('aria-hidden', 'false');
+                        icon.textContent = '−'; // Muda o ícone para menos
+                        
+                        // Calcula dinamicamente a altura do texto interno para a animação CSS funcionar suavemente
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // ==========================================
+            // 2. MENU DE ACESSIBILIDADE FLUTUANTE
+            // ==========================================
             const btnToggle = document.getElementById('btnAcessibilidadeToggle');
             const menuAcessibilidade = document.getElementById('menuAcessibilidade');
             
-            // Abrir e fechar o menu flutuante
             btnToggle.addEventListener('click', () => {
                 const botaosAtivo = menuAcessibilidade.classList.toggle('ativo');
                 btnToggle.setAttribute('aria-expanded', botaosAtivo);
                 menuAcessibilidade.setAttribute('aria-hidden', !botaosAtivo);
             });
 
-            // Closes menu if user clicks outside of it
             document.addEventListener('click', (e) => {
                 if (!btnToggle.contains(e.target) && !menuAcessibilidade.contains(e.target)) {
                     menuAcessibilidade.classList.remove('ativo');
@@ -259,34 +295,35 @@
                 }
             });
 
-            // 2. Controle de Tamanho de Fonte (Baseado no tamanho do HTML)
+            // ==========================================
+            // 3. CONTROLE DE TAMANHO DE FONTE
+            // ==========================================
             const btnAumentar = document.getElementById('btnAumentarFonte');
             const btnDiminuir = document.getElementById('btnDiminuirFonte');
             const htmlElement = document.documentElement;
-            
-            let tamanhoAtual = 16; // Tamanho base inicial em pixels
+            let tamanhoAtual = 16;
 
             btnAumentar.addEventListener('click', () => {
-                if (tamanhoAtual < 26) { // Limite máximo seguro para não quebrar o layout
+                if (tamanhoAtual < 26) {
                     tamanhoAtual += 2;
                     htmlElement.style.fontSize = tamanhoAtual + 'px';
                 }
             });
 
             btnDiminuir.addEventListener('click', () => {
-                if (tamanhoAtual > 12) { // Limite mínimo para manter legível
+                if (tamanhoAtual > 12) {
                     tamanhoAtual -= 2;
                     htmlElement.style.fontSize = tamanhoAtual + 'px';
                 }
             });
 
-            // 3. Alternador de Modo Escuro
+            // ==========================================
+            // 4. ALTERNADOR DE MODO ESCURO
+            // ==========================================
             const btnModoEscuro = document.getElementById('btnModoEscuro');
             
             btnModoEscuro.addEventListener('click', () => {
                 document.body.classList.toggle('dark-mode');
-                
-                // Atualiza o texto do botão para o usuário saber o que vai acontecer
                 if (document.body.classList.contains('dark-mode')) {
                     btnModoEscuro.textContent = 'Modo Claro';
                 } else {
@@ -295,4 +332,3 @@
             });
         });
     </script>
-</body>
