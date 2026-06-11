@@ -386,3 +386,80 @@ body.dark-mode .accordion-header {
 }
 
 .card-mini:nth-child(2) {
+    /* Configuração global para garantir proporção em telas grandes */
+html {
+    font-size: 16px; /* Base padrão */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* --- HERO SECTION (Abertura da página) --- */
+.hero-section {
+    padding: 100px 20px; /* Dá espaço vertical para não sufocar o texto */
+    text-align: center;
+}
+
+.hero-titulo {
+    font-size: 3.5rem; /* Fonte grande e imponente (aprox. 56px) */
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    max-width: 900px; /* Evita que a linha fique longa demais */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-subtitulo {
+    font-size: 1.5rem; /* Subtítulo proporcional (aprox. 24px) */
+    font-weight: 400;
+    color: #555;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+.main-container {
+    max-width: 1100px; /* Centraliza e limita a largura do site */
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Títulos das Seções (H2) */
+.subtitulo-decorado {
+    font-size: 2.2rem; /* Tamanho destacado (aprox. 35px) */
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #1e4620; /* Exemplo de tom verde para Agro */
+}
+
+/* Títulos menores dentro de cards (H3) */
+#titulo-valor, .card-mini h3 {
+    font-size: 1.6rem; /* Tamanho intermediário (aprox. 25px) */
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Botões do Accordion */
+.accordion-header {
+    font-size: 1.25rem; /* Texto dos botões legível (aprox. 20px) */
+    font-weight: 600;
+    padding: 15px 20px;
+}
+
+/* Parágrafos de texto comum */
+p {
+    font-size: 1.1rem; /* Texto ligeiramente maior que o padrão para leitura fluida */
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.descricao-contexto {
+    font-size: 1.2rem; /* Destaque para o texto de apoio */
+    margin-bottom: 25px;
+}
