@@ -236,3 +236,63 @@
    transform: translateY(0);
  }
 </style>
+    <!-- Script de Acessibilidade e Funcionalidades -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Elementos do Menu de Acessibilidade
+            const btnToggle = document.getElementById('btnAcessibilidadeToggle');
+            const menuAcessibilidade = document.getElementById('menuAcessibilidade');
+            
+            // Abrir e fechar o menu flutuante
+            btnToggle.addEventListener('click', () => {
+                const botaosAtivo = menuAcessibilidade.classList.toggle('ativo');
+                btnToggle.setAttribute('aria-expanded', botaosAtivo);
+                menuAcessibilidade.setAttribute('aria-hidden', !botaosAtivo);
+            });
+
+            // Closes menu if user clicks outside of it
+            document.addEventListener('click', (e) => {
+                if (!btnToggle.contains(e.target) && !menuAcessibilidade.contains(e.target)) {
+                    menuAcessibilidade.classList.remove('ativo');
+                    btnToggle.setAttribute('aria-expanded', 'false');
+                    menuAcessibilidade.setAttribute('aria-hidden', 'true');
+                }
+            });
+
+            // 2. Controle de Tamanho de Fonte (Baseado no tamanho do HTML)
+            const btnAumentar = document.getElementById('btnAumentarFonte');
+            const btnDiminuir = document.getElementById('btnDiminuirFonte');
+            const htmlElement = document.documentElement;
+            
+            let tamanhoAtual = 16; // Tamanho base inicial em pixels
+
+            btnAumentar.addEventListener('click', () => {
+                if (tamanhoAtual < 26) { // Limite máximo seguro para não quebrar o layout
+                    tamanhoAtual += 2;
+                    htmlElement.style.fontSize = tamanhoAtual + 'px';
+                }
+            });
+
+            btnDiminuir.addEventListener('click', () => {
+                if (tamanhoAtual > 12) { // Limite mínimo para manter legível
+                    tamanhoAtual -= 2;
+                    htmlElement.style.fontSize = tamanhoAtual + 'px';
+                }
+            });
+
+            // 3. Alternador de Modo Escuro
+            const btnModoEscuro = document.getElementById('btnModoEscuro');
+            
+            btnModoEscuro.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                
+                // Atualiza o texto do botão para o usuário saber o que vai acontecer
+                if (document.body.classList.contains('dark-mode')) {
+                    btnModoEscuro.textContent = 'Modo Claro';
+                } else {
+                    btnModoEscuro.textContent = 'Modo Escuro';
+                }
+            });
+        });
+    </script>
+</body>
