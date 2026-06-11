@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agro Forte, Futuro Sustentável - Nova Tebas</title>
-        <title>Agro Forte, Futuro Sustentável - Nova Tebas</title>
     <style>
         :root {
             --cor-azul: #0B3C5D;
@@ -36,7 +35,20 @@
             background-color: var(--bg-principal);
             color: var(--text-principal);
             line-height: 1.6;
+            transition: background-color 0.4s var(--transicao-suave), color 0.4s var(--transicao-suave);
         }
+
+        /* MODO ESCURO */
+        body.dark-mode {
+            --bg-principal: #121212;
+            --bg-cards: #1E1E1E;
+            --text-principal: #E0E0E0;
+            --text-mutado: #A0A0A0;
+            --cor-azul: #4EA8DE;
+            --cor-azul-metalico: #0A0F14;
+        }
+
+        /* HERO SECTION */
         .hero-section {
             position: relative;
             min-height: 60vh;
@@ -50,14 +62,37 @@
         }
         .hero-titulo { font-size: var(--font-titulo-hero); font-weight: 800; margin-bottom: 20px; }
         .hero-subtitulo { font-size: var(--font-subtitulo-hero); color: var(--cor-amarelo); border-left: 4px solid var(--cor-ouro); padding-left: 15px; }
+        
+        /* CONTAINER PRINCIPAL */
         .main-container { max-width: 1400px; margin: 0 auto; padding: var(--padding-container); display: flex; flex-direction: column; gap: clamp(3rem, 8vw, 6rem); }
         .subtitulo-decorado { font-size: var(--font-titulos); color: var(--cor-azul); margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        body.dark-mode .subtitulo-decorado { color: var(--cor-azul-celeste); }
         .subtitulo-decorado::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background-color: var(--cor-verde); }
         .secao-introducao p { font-size: var(--font-corpo); margin-bottom: 20px; }
-        .accordion-header { font-size: 1.3rem; font-weight: 700; color: var(--cor-azul-metalico); cursor: pointer; }
-    </style>
-</head>
+        
+        /* PAINEL ACESSIBILIDADE */
+        .acessibilidade-painel { position: fixed; top: 20px; left: 20px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-start; }
+        .btn-acessibilidade-toggle { background-color: var(--cor-azul); color: var(--cor-branco); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .acessibilidade-conteudo { display: none; flex-direction: column; gap: 8px; background-color: var(--bg-cards); padding: 15px; border-radius: var(--border-radius-padrao); box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-top: 10px; border: 2px solid var(--cor-azul-celeste); }
+        .acessibilidade-conteudo.ativo { display: flex; }
+        .acessibilidade-conteudo button { background-color: var(--bg-principal); color: var(--text-principal); border: 1px solid var(--cor-azul-celeste); padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
 
+        /* REGRAS DO ACCORDION CORRIGIDAS */
+        .accordion-container { display: flex; flex-direction: column; gap: 12px; max-width: 1000px; margin-top: 20px; }
+        .accordion-item { background-color: var(--bg-cards); border-radius: var(--border-radius-padrao); overflow: hidden; border: 1px solid rgba(0,0,0,0.08); box-shadow: var(--sombra-suave); transition: all 0.3s ease; }
+        body.dark-mode .accordion-item { border: 1px solid rgba(255,255,255,0.08); }
+        .accordion-header { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 25px; background: none; border: none; text-align: left; font-size: 1.3rem; font-weight: 700; color: var(--cor-azul-metalico); cursor: pointer; }
+        body.dark-mode .accordion-header { color: var(--cor-branco); }
+        .accordion-header .icon { font-size: 1.5rem; color: var(--cor-verde); transition: transform 0.3s ease; }
+        
+        /* ESTADO INICIAL FECHADO: Oculta o texto */
+        .accordion-content { max-height: 0; overflow: hidden; padding: 0 25px; transition: max-height 0.3s ease, padding 0.3s ease; background-color: rgba(75, 138, 97, 0.02); }
+        .accordion-content p { font-size: var(--font-corpo); color: var(--text-principal); padding-top: 5px; }
+        
+        /* ESTADO INJETADO VIA JS (Aba Aberta) */
+        .accordion-item.ativo .accordion-content { padding-bottom: 25px; }
+        .accordion-item.ativo .accordion-header { color: var(--cor-verde); }
+    </style>
 </head>
 <body>
 
@@ -89,7 +124,7 @@
         <section class="secao-introducao" aria-labelledby="titulo-intro">
             <h2 id="titulo-intro" class="subtitulo-decorado">Bem-vindo à força do campo de Nova Tebas!</h2>
             <p>O agronegócio é a principal força econômica de Nova Tebas, município localizado na região Central do Paraná. O setor destaca-se pela forte presença da agricultura familiar, que compõe cerca de 85% das propriedades rurais locais, gerando renda direta, movimentando o comércio e promovendo o desenvolvimento sustentável.</p>
-            <p>Nossa terra é reconhecida pela riqueza de seu solo, pelo clima propício e, acima de tudo, pela dedicação do produtor rural. Com uma forte base na agricultura familiar, o município une tradição e inovação para alimentar famílias e impulsionar o desenvolvimento de toda a região.</p>
+            <p>Nossa terra é reconhecida pela riqueza de seu solo, pelo clima propício e, acima de tudo, pela dedicação do produtor rural. Com uma forte base na agricultura familiar, o município une tradição and inovação para alimentar famílias e impulsionar o desenvolvimento de toda a região.</p>
         </section>
 
         <!-- Seção de Pilares (Cards e Accordion) -->
@@ -116,219 +151,4 @@
                         <span class="icon" aria-hidden="true">+</span>
                     </button>
                     <div id="pilar-graos" class="accordion-content" aria-hidden="true">
-                        <p>Grandes e médias extensões de terra dedicadas ao cultivo de culturas fortes no estado, como a soja e o milho, que abastecem o mercado nacional e as cooperativas parceiras.</p>
-                    </div>
-                </div>
-
-                <!-- Pilar 3 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" aria-expanded="false" aria-controls="pilar-corte">
-                        <span>Pecuária de Corte</span>
-                        <span class="icon" aria-hidden="true">+</span>
-                    </button>
-                    <div id="pilar-corte" class="accordion-content" aria-hidden="true">
-                        <p>Manejo estratégico de rebanhos bovinos, gerando carne de excelente qualidade por meio de pastagens bem aproveitadas.</p>
-                    </div>
-                </div>
-
-                <!-- Pilar 4 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" aria-expanded="false" aria-controls="pilar-fruticultura">
-                        <span>Fruticultura e Olericultura Orgânica</span>
-                        <span class="icon" aria-hidden="true">+</span>
-                    </button>
-                    <div id="pilar-fruticultura" class="accordion-content" aria-hidden="true">
-                        <p>Nova Tebas ganhou destaque regional com a agroindustrialização de frutas e polpas orgânicas, liderada por cooperativas locais (como a Cooperatvama no distrito de Poema). O modelo associa tecnologia sustentável, como o uso de energia solar e captação de água da chuva, gerando alto valor agregado.</p>
-                    </div>
-                </div>
-
-                <!-- Pilar 5 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" aria-expanded="false" aria-controls="pilar-agroindustria">
-                        <span>Pequenas Agroindústrias</span>
-                        <span class="icon" aria-hidden="true">+</span>
-                    </button>
-                    <div id="pilar-agroindustria" class="accordion-content" aria-hidden="true">
-                        <p>Diversificação que inclui a produção local de ovos comerciais, panificados e hortaliças certificados pelo Serviço de Inspeção Municipal (SIM), abrindo portas para novos mercados locais e regionais.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Galeria de Imagens Reservadas -->
-        <section class="galeria-imagens" aria-label="Galeria de fotos representativas do campo">
-            <div class="imagem"> <img src="Foto1.png" alt="Produção agrícola sustentável no campo de Nova Tebas"> </div>
-            <div class="imagem"> <img src="Foto2.png" alt="Agricultura familiar e manejo inteligente de plantio"> </div>
-            <div class="imagem"> <img src="Foto3.png" alt="Inovação tecnológica aplicada ao agronegócio moderno"> </div>
-        </section>
-
-        <!-- Detalhes Adicionais de Valor -->
-        <section class="secao-detalhes" aria-labelledby="titulo-valor">
-            <div class="card-informativo-duplo">
-                <div class="card-mini">
-                    <h3 id="titulo-valor">O Valor da Agricultura Familiar</h3>
-                    <p>Cerca de 85% das propriedades rurais de Nova Tebas operam sob o regime familiar. Esse modelo não apenas fixa o homem no campo, mas também garante a segurança alimentar do município e fortalece cooperativas essenciais (como a Coopertebas). O incentivo à sucessão hereditária e ao cooperativismo faz com que as novas gerações continuem inovando no agronegócio local.</p>
-                </div>
-                <div class="card-mini">
-                    <h3>Inovação e Futuro no Campo</h3>
-                    <p>Nova Tebas investe constantemente em parcerias com órgãos de extensão rural (como o IDR-Paraná e o Sebrae) para levar capacitação técnica ao campo. O foco do município está em alinhar a alta produtividade com as exigências do mercado moderno: respeito ao meio ambiente, transição energética e manejo inteligente do solo.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Área de Interação e Formulários Grid Split -->
-        <section class="grid-interacao">
-            
-            <!-- Formulário de Inscrição (Esquerda) -->
-            <div class="card-formulario-container">
-                <h3>Venha conhecer melhor Nova Tebas</h3>
-                <p>Inscreva-se no nosso seminário on-line sobre o Agro sustentável em nosso município.</p>
-                
-                <form id="formSeminario" class="form-moderno">
-                    <div class="grupo-campo">
-                        <label for="campo-nome">Nome Completo</label>
-                        <input type="text" id="campo-nome" name="nome" placeholder="Digite seu nome" required>
-                    </div>
-                    <div class="grupo-campo">
-                        <label for="campo-email">E-mail</label>
-                        <input type="email" id="campo-email" name="email" placeholder="seuemail@exemplo.com" required>
-                    </div>
-                    <div class="grupo-linha">
-                        <div class="grupo-campo">
-                            <label for="campo-cidade">Cidade</label>
-                            <input type="text" id="campo-cidade" name="cidade" required>
-                        </div>
-                        <div class="grupo-campo">
-                            <label for="campo-estado">Estado</label>
-                            <input type="text" id="campo-estado" name="estado" required>
-<!-- Botão de Ação -->
-<a href="https://www.novatebas.pr.gov.br/index?sessao=b054603368svb0&id=3487" class="botao-rural">
- <strong>É produtor rural?</strong> Conheça os serviços de assistência da Secretaria de Desenvolvimento Rural.
-</a>
-
-
-<!-- Estilo do Botão (Cole dentro da sua tag <head> ou no seu arquivo .css) -->
-<style>
- .botao-rural {
-   display: inline-block;
-   background-color: #2e7d32; /* Verde sustentável/rural */
-   color: #ffffff;
-   text-decoration: none;
-   padding: 15px 25px;
-   border-radius: 8px;
-   font-family: Arial, sans-serif;
-   font-size: 16px;
-   line-height: 1.4;
-   max-width: 400px;
-   text-align: center;
-   transition: background-color 0.3s ease, transform 0.2s ease;
-   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
- }
-
-
- .botao-rural:hover {
-   background-color: #1b5e20; /* Verde mais escuro ao passar o mouse */
-   transform: translateY(-2px);
- }
-
-
- .botao-rural:active {
-   transform: translateY(0);
- }
-    <!-- Script de Acessibilidade e Accordion -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // ==========================================
-            // 1. FUNCIONAMENTO DO ACCORDION (ABAS)
-            // ==========================================
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const content = item.querySelector('.accordion-content');
-                    const icon = header.querySelector('.icon');
-                    
-                    // Verifica se a aba clicada já está aberta
-                    const estaAtivo = item.classList.contains('ativo');
-
-                    // CORREÇÃO VISUAL EXTRA: Fecha todos os outros accordions antes de abrir o novo (opcional)
-                    document.querySelectorAll('.accordion-item').forEach(outroItem => {
-                        outroItem.classList.remove('ativo');
-                        outroItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
-                        outroItem.querySelector('.accordion-content').setAttribute('aria-hidden', 'true');
-                        outroItem.querySelector('.accordion-content').style.maxHeight = null;
-                        const outroIcon = outroItem.querySelector('.icon');
-                        if (outroIcon) outroIcon.textContent = '+';
-                    });
-
-                    // Se a aba não estava ativa, abre ela agora
-                    if (!estaAtivo) {
-                        item.classList.add('ativo');
-                        header.setAttribute('aria-expanded', 'true');
-                        content.setAttribute('aria-hidden', 'false');
-                        icon.textContent = '−'; // Muda o ícone para menos
-                        
-                        // Calcula dinamicamente a altura do texto interno para a animação CSS funcionar suavemente
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
-            });
-
-            // ==========================================
-            // 2. MENU DE ACESSIBILIDADE FLUTUANTE
-            // ==========================================
-            const btnToggle = document.getElementById('btnAcessibilidadeToggle');
-            const menuAcessibilidade = document.getElementById('menuAcessibilidade');
-            
-            btnToggle.addEventListener('click', () => {
-                const botaosAtivo = menuAcessibilidade.classList.toggle('ativo');
-                btnToggle.setAttribute('aria-expanded', botaosAtivo);
-                menuAcessibilidade.setAttribute('aria-hidden', !botaosAtivo);
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!btnToggle.contains(e.target) && !menuAcessibilidade.contains(e.target)) {
-                    menuAcessibilidade.classList.remove('ativo');
-                    btnToggle.setAttribute('aria-expanded', 'false');
-                    menuAcessibilidade.setAttribute('aria-hidden', 'true');
-                }
-            });
-
-            // ==========================================
-            // 3. CONTROLE DE TAMANHO DE FONTE
-            // ==========================================
-            const btnAumentar = document.getElementById('btnAumentarFonte');
-            const btnDiminuir = document.getElementById('btnDiminuirFonte');
-            const htmlElement = document.documentElement;
-            let tamanhoAtual = 16;
-
-            btnAumentar.addEventListener('click', () => {
-                if (tamanhoAtual < 26) {
-                    tamanhoAtual += 2;
-                    htmlElement.style.fontSize = tamanhoAtual + 'px';
-                }
-            });
-
-            btnDiminuir.addEventListener('click', () => {
-                if (tamanhoAtual > 12) {
-                    tamanhoAtual -= 2;
-                    htmlElement.style.fontSize = tamanhoAtual + 'px';
-                }
-            });
-
-            // ==========================================
-            // 4. ALTERNADOR DE MODO ESCURO
-            // ==========================================
-            const btnModoEscuro = document.getElementById('btnModoEscuro');
-            
-            btnModoEscuro.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                if (document.body.classList.contains('dark-mode')) {
-                    btnModoEscuro.textContent = 'Modo Claro';
-                } else {
-                    btnModoEscuro.textContent = 'Modo Escuro';
-                }
-            });
-        });
-    </script>
+Use o código com cuidado.Grandes e médias extensões de terra dedicadas ao cultivo de culturas fortes no estado, como a soja e o milho, que abastecem o mercado nacional e as cooperativas parceiras.Pecuária de Corte+Manejo estratégico de rebanhos bovinos, gerando carne de excelente qualidade por meio de pastagens bem aproveitadas.Fruticultura e Olericultura Orgânica+Nova Tebas ganhou destaque regional com a agroindustrialização de frutas e polpas orgânicas, liderada por cooperativas locais (como a Cooperatvama no distrito de Poema). O modelo associa tecnologia sustentável, como o uso de energia solar e captação de água da chuva, gerando alto valor agregado.Pequenas Agroindústrias+Diversificação que inclui a produção local de ovos comerciais, panificados e hortaliças certificados pelo Serviço de Inspeção Municipal (SIM), abrindo portas para novos mercados locais e regionais.document.addEventListener('DOMContentLoaded', () => {// FUNCIONAMENTO DO ACCORDION (ABAS)const accordionHeaders = document.querySelectorAll('.accordion-header');accordionHeaders.forEach(header => {header.addEventListener('click', () => {const item = header.parentElement;const content = item.querySelector('.accordion-content');const icon = header.querySelector('.icon');const estaAtivo = item.classList.contains('ativo');// Fecha as outras para ficar organizadodocument.querySelectorAll('.accordion-item').forEach(outroItem => {outroItem.classList.remove('ativo');outroItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');outroItem.querySelector('.accordion-content').setAttribute('aria-hidden', 'true');outroItem.querySelector('.accordion-content').style.maxHeight = null;const outroIcon = outroItem.querySelector('.icon');if (outroIcon) outroIcon.textContent = '+';});// Abre a aba selecionadaif (!estaAtivo) {item.classList.add('ativo');header.setAttribute('aria-expanded', 'true');content.setAttribute('aria-hidden', 'false');if (icon) icon.textContent = '−';content.style.maxHeight = content.scrollHeight + "px";}});});// MENU DE ACESSIBILIDADE FLUTUANTEconst btnToggle = document.getElementById('btnAcessibilidadeToggle');const menuAcessibilidade = document.getElementById('menuAcessibilidade');btnToggle.addEventListener('click', () => {const botaosAtivo = menuAcessibilidade.classList.toggle('ativo');btnToggle.setAttribute('aria-expanded', botaosAtivo);menuAcessibilidade.setAttribute('aria-hidden', !botaosAtivo);});document.addEventListener('click', (e) => {if (!btnToggle.contains(e.target) && !menuAcessibilidade.contains(e.target)) {menuAcessibilidade.classList.remove('ativo');btnToggle.setAttribute('aria-expanded', 'false');menuAcessibilidade.setAttribute('aria-hidden', 'true');}});// CONTROLE DE TAMANHO DE FONTEconst btnAumentar = document.getElementById('btnAumentarFonte');const btnDiminuir = document.getElementById('btnDiminuirFonte');const htmlElement = document.documentElement;let tamanhoAtual = 16;btnAumentar.addEventListener('click', () => {if (tamanhoAtual < 26) {tamanhoAtual += 2;htmlElement.style.fontSize = tamanhoAtual + 'px';}});btnDiminuir.addEventListener('click', () => {if (tamanhoAtual > 12) {tamanhoAtual -= 2;htmlElement.style.fontSize = tamanhoAtual + 'px';}});// ALTERNADOR DE MODO ESCUROconst btnModoEscuro = document.getElementById('btnModoEscuro');btnModoEscuro.addEventListener('click', () => {document.body.classList.toggle('dark-mode');btnModoEscuro.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Escuro';});});
