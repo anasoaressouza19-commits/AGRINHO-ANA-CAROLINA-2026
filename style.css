@@ -3,6 +3,8 @@
 /* ==========================================================================
    VARIÁVEIS DE CONFIGURAÇÃO DO TEMA (Fácil Personalização)
    ========================================================================== */
+   body { background-color: red !important; }
+
    :root {
     /* Paleta de Cores Obrigatória */
     --cor-azul: #0B3C5D;
