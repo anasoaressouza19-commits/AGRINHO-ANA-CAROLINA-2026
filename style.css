@@ -3,7 +3,7 @@
 /* ==========================================================================
    VARIÁVEIS DE CONFIGURAÇÃO DO TEMA (Fácil Personalização)
    ========================================================================== */
-:root {
+   :root {
     /* Paleta de Cores Obrigatória */
     --cor-azul: #0B3C5D;
     --cor-branco: #FFFFFF;
@@ -20,19 +20,20 @@
     --text-principal: #2B2D42;
     --text-mutado: #5C677D;
 
-    /* Tipografia Dinâmica Fluid Scale com clamp() */
-    --font-titulo-hero: clamp(2rem, 4vw + 1rem, 3.8rem);
-    --font-subtitulo-hero: clamp(1.1rem, 2vw + 0.5rem, 1.8rem);
-    --font-titulos: clamp(1.5rem, 3vw, 2.2rem);
-    --font-corpo: clamp(1rem, 1vw + 0.5rem, 1.15rem);
+    /* CORREÇÃO AQUI: Valores mínimos e base ajustados para telas normais ficarem grandes */
+    --font-titulo-hero: clamp(2.8rem, 5vw + 1rem, 4.2rem);    /* Título imponente */
+    --font-subtitulo-hero: clamp(1.4rem, 2vw + 0.8rem, 2rem); /* Subtítulo visível */
+    --font-titulos: clamp(1.8rem, 3vw + 0.5rem, 2.6rem);       /* H2 destacados */
+    --font-corpo: clamp(1.1rem, 1vw + 0.6rem, 1.25rem);       /* Texto de leitura confortável */
 
     /* Espaçamentos e Estrutura Configuráveis */
-    --padding-container: clamp(1rem, 5vw, 4rem);
+    --padding-container: clamp(1.5rem, 5vw, 4rem);
     --border-radius-padrao: 12px;
     --transicao-suave: cubic-bezier(0.25, 1, 0.5, 1);
     --sombra-suave: 0 10px 30px rgba(0, 0, 0, 0.05);
     --sombra-hover: 0 20px 40px rgba(11, 60, 93, 0.15);
 }
+
 
 /* Modo Escuro (Acessibilidade) */
 body.dark-mode {
